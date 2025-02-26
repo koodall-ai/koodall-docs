@@ -1,88 +1,106 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Koodall AI Internal Documentation",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/Koodall_favicon.png",
   "navigation": {
-    "tabs": [
-      {
-        "tab": "Guides",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Getting Started",
             "pages": [
-              "introduction",
-              "quickstart",
-              "development"
+              "introduction"
             ]
           },
           {
-            "group": "Essentials",
+            "group": "Internal SOP",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              {
+                "group": "HR Department",
+                "pages": [
+                  "SOP/HR/Pre-Onboarding_Preparation",
+                  "SOP/HR/Day_1_Onboarding",
+                  "SOP/HR/Onboarding_Training",
+                  "SOP/HR/Onboarding_Follow-Up"
+                ]
+              },
+              {
+                "group": "Sales Department",
+                "pages": [
+                  "SOP/Sales/Contract_Negotiation",
+                  "SOP/Sales/Customer_Prospecting",
+                  "SOP/Sales/Customer_Relationship_Management",
+                  "SOP/Sales/Sales_Demonstration"
+                ]
+              },
+              {
+                "group": "Marketing Department",
+                "pages": [
+                  "SOP/Marketing/Brand_Building_and_Content_Marketing",
+                  "SOP/Marketing/Social_Media_Management",
+                  "SOP/Marketing/Customer_Relationship_Management",
+                  "SOP/Marketing/Data_Analysis_and_Optimization",
+                  "SOP/Marketing/Market_Research_and_Positioning"
+                ]
+              },
+              {
+                "group": "IT Department",
+                "pages": [
+                  "SOP/IT/User_Support_and_Onboarding",
+                  "SOP/IT/Infrastructure_Management",
+                  "SOP/IT/Document_and_Knowledge_Management",
+                  "SOP/IT/IT_Emergency_Response"
+                ]
+              },
+              {
+                "group": "Tech Support Department",
+                "pages": [
+                  "SOP/Tech_Support/Unified_Receipt_and_Handling_Process",
+                  "SOP/Tech_Support/Product_Specific_Technical_Manuals"
+                ]
+              }
             ]
           }
-        ]
-      },
-      {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
-            ]
-          }
-        ]
-      }
-    ],
+        ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Koodall Videos",
+          "href": "https://display.koodall.ai/",
+          "icon": "photo-film"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "anchor": "Try-on Demo",
+          "href": "https://tryon.koodall.ai/",
+          "icon": "glasses-round"
         },
         {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Web AR Demo",
+          "href": "https://ar.koodall.ai/",
+          "icon": "vr-cardboard"
+        },
+        {
+          "anchor": "Blogs",
+          "href": "https://blogs.koodall.ai/",
+          "icon": "square-rss"
         }
       ]
     }
   },
   "logo": {
     "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/dark.svg",
+    "href": "https://www.koodall.ai/"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:support@koodall.ai"
       }
     ],
     "primary": {
@@ -93,9 +111,8 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/KoodallAI",
+      "linkedin": "https://www.linkedin.com/company/koodall-ai"
     }
   }
 }
