@@ -1,0 +1,204 @@
+---
+title: Advanced Features Guide
+sidebarTitle: 'Advanced Features Guide'
+description: 'Guide to using the advanced features of the Banuba Video Editor SDK for Android'
+---
+
+## Audio Content
+Adding Background Music
+
+```kotlin
+// Define custom music browser configuration
+val musicBrowserConfig = MusicEditorConfig(
+    recordingEnabled = true,
+    showVoiceFilters = true,
+    audioRecordingDurationSec = 60
+)
+
+// Add a custom music track programmatically
+val audioTrack = AudioTrack(
+    uri = Uri.parse("content://media/external/audio/123"),
+    startPositionMs = 0,
+    endPositionMs = 30000,
+    volume = 1.0f
+)
+
+// Apply the audio track
+videoEditorAPI.addAudioTrack(audioTrack)
+```
+
+
+###Video Recording
+Customizing Camera Settings
+
+```kotlin
+// Create custom camera configuration
+val cameraConfig = CameraConfig(
+    maximumVideoDuration = 60 * 1000, // 60 seconds
+    minimumVideoDuration = 1000, // 1 second
+    supportedFpsValues = listOf(30, 60),
+    flashInitialState = FlashState.OFF,
+    isFrontCameraDefault = true
+)
+
+// Apply camera configuration
+VideoEditorIntegrationModule.initialize(
+    application,
+    licenseToken,
+    integrationAppProvider = object : VideoEditorIntegrationModule.IntegrationAppProvider {
+        override fun provideCameraConfig(): CameraConfig = cameraConfig
+    }
+)
+```
+
+## AR Effects and Filters
+Adding Custom AR Effects
+```kotlin
+// Define custom effects provider
+class CustomEffectsProvider : EffectsProvider {
+    override fun provideEffects(): List<Effect> {
+        return listOf(
+            Effect(
+                name = "My Custom Effect",
+                iconRes = R.drawable.ic_custom_effect,
+                type = EffectType.MASK,
+                path = "effects/custom_effect.zip"
+            ),
+            Effect(
+                name = "Funny Filter",
+                iconRes = R.drawable.ic_funny_filter,
+                type = EffectType.FILTER,
+                path = "effects/funny_filter.zip"
+            )
+        )
+    }
+}
+
+// Register the custom effects provider
+VideoEditorIntegrationModule.initialize(
+    application,
+    licenseToken,
+    effectsProvider = CustomEffectsProvider()
+)
+```
+
+## Stickers and Text
+Adding Custom Stickers
+
+```kotlin
+// Define custom stickers provider
+class CustomStickersProvider : StickersProvider {
+    override fun provideStickers(): List<StickerCategory> {
+        return listOf(
+            StickerCategory(
+                name = "Custom Stickers",
+                iconRes = R.drawable.ic_sticker_category,
+                stickers = listOf(
+                    Sticker(
+                        uri = Uri.parse("file:///android_asset/stickers/sticker1.png"),
+                        id = "sticker1"
+                    ),
+                    Sticker(
+                        uri = Uri.parse("file:///android_asset/stickers/sticker2.png"),
+                        id = "sticker2"
+                    )
+                )
+            )
+        )
+    }
+}
+
+// Register the custom stickers provider
+VideoEditorIntegrationModule.initialize(
+    application,
+    licenseToken,
+    stickersProvider = CustomStickersProvider()
+)
+```
+
+## Video Cover Selection
+Enable cover selection feature:
+
+```kotlin
+// Configure cover selection
+val editorConfig = EditorConfig(
+    coverSelectionEnabled = true,
+    coverOptions = CoverOptions(
+        defaultCoverFrameTimeMs = 0,
+        showCoverSelection = true
+    )
+)
+
+// Set up a cover selection callback
+val coverSelectionCallback = { uri: Uri, coverTimestamp: Long ->
+    // Handle the selected cover image and its timestamp
+    Log.d("CoverSelection", "Cover selected at $coverTimestamp ms: $uri")
+}
+
+// Register the callback
+VideoEditorIntegrationModule.registerEditorCallbacks(
+    onCoverSelected = coverSelectionCallback
+)
+```
+
+## Green Screen Effect
+Enable the green screen feature:
+
+```kotlin
+// Enable green screen in editor configuration
+val editorConfig = EditorConfig(
+    greenScreenEnabled = true
+)
+
+// Initialize with green screen configuration
+VideoEditorIntegrationModule.initialize(
+    application,
+    licenseToken,
+    integrationAppProvider = object : VideoEditorIntegrationModule.IntegrationAppProvider {
+        override fun provideEditorConfig(): EditorConfig = editorConfig
+    }
+)
+```
+
+## Auto Clipping
+Use AI-powered auto-clipping:
+
+```kotlin
+// Enable AI clipping in configuration
+val config = EditorConfig(
+    aiClippingEnabled = true
+)
+
+// Set up AI clipping callback
+val aiClippingCallback = { segments: List<ClipSegment> ->
+    // Handle AI-generated clip segments
+    Log.d("AIClipping", "Generated ${segments.size} segments")
+}
+
+// Register the callback
+VideoEditorIntegrationModule.registerEditorCallbacks(
+    onAIClippingReady = aiClippingCallback
+)
+```
+
+
+## FFmpeg Integration
+The Banuba Video Editor SDK uses FFmpeg for video processing. You can configure FFmpeg settings:
+
+```kotlin
+// Configure FFmpeg settings
+val exportConfig = ExportConfig(
+    ffmpegBitrate = 8_000_000, // 8 Mbps
+    ffmpegThreadsCount = 2,
+    watermarkPath = "watermarks/company_logo.png"
+)
+
+// Initialize with FFmpeg export configuration
+VideoEditorIntegrationModule.initialize(
+    application,
+    licenseToken,
+    integrationAppProvider = object : VideoEditorIntegrationModule.IntegrationAppProvider {
+        override fun provideExportConfig(): ExportConfig = exportConfig
+    }
+)
+```

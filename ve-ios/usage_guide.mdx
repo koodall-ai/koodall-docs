@@ -1,0 +1,102 @@
+---
+title: Basic Usage Guide
+sidebarTitle: 'Basic Usage Guide'
+description: 'Basic usage methods for the Banuba Video Editor SDK'
+---
+
+## Launching the Video Editor
+
+### Launching in a UIKit Project
+
+Here’s the basic code to launch the video editor in a UIKit project:
+
+```swift
+import UIKit
+import BanubaVideoEditorSDK
+
+class ViewController: UIViewController {
+    
+    private var videoEditor: BanubaVideoEditor?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Initialize the video editor
+        videoEditor = BanubaVideoEditor()
+    }
+    
+    @IBAction func openVideoEditor(_ sender: UIButton) {
+        // Present the editor from the current controller
+        videoEditor?.present(from: self)
+    }
+}
+```
+
+### Launching in a SwiftUI Project
+
+Here’s how to launch the video editor in a SwiftUI project:
+
+```swift
+import SwiftUI
+import BanubaVideoEditorSDK
+
+struct ContentView: View {
+    @State private var showVideoEditor = false
+    
+    var body: some View {
+        Button("Open Video Editor") {
+            showVideoEditor = true
+        }
+        .sheet(isPresented: $showVideoEditor) {
+            VideoEditorView()
+        }
+    }
+}
+
+struct VideoEditorView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        let hostingController = UIViewController()
+        let videoEditor = BanubaVideoEditor()
+        videoEditor.present(from: hostingController)
+        return hostingController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+```
+
+## Handling Video Export
+
+Implement video export functionality:
+
+```swift
+// Set the export delegate
+videoEditor.exportDelegate = self
+
+// Implement the export delegate methods
+extension ViewController: BanubaVideoEditorDelegate {
+    func videoEditorDidExport(videoAt url: URL) {
+        // Handle the exported video
+        print("Video exported to: \(url.path)")
+    }
+    
+    func videoEditorDidCancel() {
+        // Handle user cancellation
+        print("User canceled editing")
+    }
+}
+```
+
+## Customizing Editor Settings
+
+You can customize the editor using a configuration object:
+
+```swift
+// Create a configuration object
+let config = VideoEditorConfig()
+config.recordButtonMode = .video
+config.galleryEnabled = true
+config.musicEditorEnabled = true
+
+// Initialize the editor with the configuration
+let videoEditor = BanubaVideoEditor(config: config)
+```

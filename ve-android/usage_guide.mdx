@@ -1,0 +1,161 @@
+---
+title: Basic Usage Guide
+sidebarTitle: 'Basic Usage Guide'
+description: 'Basic usage methods for the Banuba Video Editor SDK for Android'
+---
+
+## Launching the Video Editor
+
+### Launching in a Standard Activity
+Here's how to launch the video editor from an Activity:
+
+```kotlin
+import com.banuba.sdk.ve.flow.VideoEditorIntegrationModule
+
+class MainActivity : AppCompatActivity() {
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        
+        // Initialize the SDK with your license token
+        VideoEditorIntegrationModule.initialize(application, getString(R.string.banuba_token))
+        
+        // Launch button
+        findViewById<Button>(R.id.launchEditorButton).setOnClickListener {
+            // Start the video editor
+            VideoEditorIntegrationModule.startVideoEditor(this)
+        }
+    }
+    
+    // Handle result when the editor completes
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        
+        if (requestCode == VideoEditorIntegrationModule.VIDEO_EDITOR_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                // Video was successfully exported
+                val exportedVideoUri = data?.getParcelableExtra<Uri>(VideoEditorIntegrationModule.EXPORT_VIDEO_URI)
+                // Handle the exported video
+            } else {
+                // User canceled or export failed
+            }
+        }
+    }
+}
+
+```
+
+### Launching in a Jetpack Compose App
+Here's how to launch the video editor from a Compose app:
+
+```kotlin
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import com.banuba.sdk.ve.flow.VideoEditorIntegrationModule
+
+@Composable
+fun VideoEditorLauncher() {
+    val context = LocalContext.current
+    
+    // Set up the activity result launcher
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val exportedVideoUri = result.data?.getParcelableExtra<Uri>(VideoEditorIntegrationModule.EXPORT_VIDEO_URI)
+            // Handle the exported video
+        }
+    }
+    
+    Button(
+        onClick = {
+            // Launch the video editor
+            val intent = VideoEditorIntegrationModule.createVideoEditorIntent(context)
+            launcher.launch(intent)
+        }
+    ) {
+        Text("Open Video Editor")
+    }
+}
+```
+
+## Customizing Editor Settings
+You can customize the editor by providing a custom configuration:
+
+```kotlin
+import com.banuba.sdk.ve.flow.VideoEditorIntegrationModule
+import com.banuba.sdk.ve.effects.Effects
+
+// Create a custom SDK integration
+class CustomVideoEditorIntegration : VideoEditorIntegrationModule.IntegrationAppProvider {
+    
+    override fun provideExternalSettings(): ExternalSettings {
+        return ExternalSettings(
+            musicEditorEnabled = true,
+            pipEditorEnabled = true,
+            textEditorEnabled = true,
+            speedEditorEnabled = true
+        )
+    }
+    
+    override fun provideMusicEditorConfig(): MusicEditorConfig {
+        return MusicEditorConfig(
+            recordingEnabled = true,
+            showVoiceFilters = true
+        )
+    }
+}
+
+// Then use this custom configuration
+VideoEditorIntegrationModule.initialize(
+    application,
+    licenseToken,
+    integrationAppProvider = CustomVideoEditorIntegration()
+)
+```
+
+## Handling Editor Events
+You can register callbacks to handle various editor events:
+
+```kotlin
+// Set up callback handlers
+VideoEditorIntegrationModule.registerEditorCallbacks(
+    onVideoExport = { uri ->
+        // Handle successful export
+        Log.d("VideoEditor", "Video exported: $uri")
+    },
+    onVideoExportError = { error ->
+        // Handle export error
+        Log.e("VideoEditor", "Export error: $error")
+    },
+    onClose = {
+        // Handle editor close
+        Log.d("VideoEditor", "Editor closed")
+    }
+)
+```
+
+## Opening the Editor with Content
+You can start the editor with pre-loaded content:
+
+```kotlin
+// Create an intent with video content
+val intent = VideoEditorIntegrationModule.createVideoEditorIntent(
+    context = this,
+    videoUrls = listOf(
+        Uri.parse("content://media/external/video/123"),
+        Uri.parse("content://media/external/video/456")
+    )
+)
+
+// Start the editor
+startActivityForResult(intent, VideoEditorIntegrationModule.VIDEO_EDITOR_REQUEST_CODE)
+```
+
+

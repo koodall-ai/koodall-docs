@@ -1,0 +1,109 @@
+---
+title: Advanced Features Guide
+sidebarTitle: 'Advanced Features Guide'
+description: 'Guide to using the advanced features of the Banuba Video Editor SDK'
+---
+
+## Audio Content
+
+Adding Background Music
+
+```swift
+// Configure the audio track
+let audioTrack = AudioTrack(url: musicURL, startTime: 0.0, endTime: 10.0)
+
+// Add the audio track to the editor
+videoEditor.addAudioTrack(audioTrack)
+```
+
+## Video Recording
+
+Customizing Camera Settings
+
+```swift
+// Create camera configuration
+let cameraConfig = CameraConfiguration()
+cameraConfig.recordingResolution = .fullHD
+cameraConfig.flashEnabled = true
+
+// Apply configuration
+videoEditor.setCameraConfiguration(cameraConfig)
+```
+
+## AR Effects and Filters
+
+Adding a Custom Filter
+
+```swift
+// Add a custom filter
+let customFilter = FilterModel(name: "My Filter", previewImageURL: previewURL, filterURL: filterURL)
+videoEditor.addFilter(customFilter)
+```
+
+## Stickers and Text
+
+Adding Custom Stickers
+
+```swift
+// Define a sticker pack
+let stickerPack = StickerPack(name: "Custom Stickers", previewImageURL: previewURL, stickers: [
+    Sticker(imageURL: sticker1URL),
+    Sticker(imageURL: sticker2URL)
+])
+
+// Add the sticker pack to the editor
+videoEditor.addStickerPack(stickerPack)
+```
+
+## Video Cover Selection
+
+Allow users to select a video cover:
+
+```swift
+// Enable cover selection
+let config = VideoEditorConfig()
+config.coverSelectionEnabled = true
+
+// Handle cover selection
+videoEditor.coverSelectionDelegate = self
+
+extension ViewController: CoverSelectionDelegate {
+    func didSelectCover(at time: TimeInterval, image: UIImage) {
+        // Handle the selected cover
+    }
+}
+```
+
+## Green Screen Effect
+
+Enable the green screen effect:
+
+```swift
+// Configure green screen feature
+let config = VideoEditorConfig()
+config.greenScreenEnabled = true
+
+// Initialize the editor with the configuration
+let videoEditor = BanubaVideoEditor(config: config)
+```
+
+## Auto Clipping
+
+Use AI-powered auto-clipping:
+
+```swift
+// Enable AI clipping
+let config = VideoEditorConfig()
+config.aiClippingEnabled = true
+
+// Handle AI clipping results
+videoEditor.aiClippingDelegate = self
+
+extension ViewController: AIClippingDelegate {
+    func didCompleteClipping(clips: [VideoClip]) {
+        // Handle the AI-generated clips
+    }
+}
+```
+
+

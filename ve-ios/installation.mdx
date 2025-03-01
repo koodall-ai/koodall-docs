@@ -1,0 +1,92 @@
+---
+title: Installation Guide
+sidebarTitle: 'Installation Guide'
+description: 'How to install the Banuba Video Editor SDK for iOS'
+---
+
+## Installation Methods
+
+The Banuba Video Editor SDK supports two installation methods: CocoaPods and Swift Package Manager (SPM). CocoaPods is recommended for its simplicity and reliability.
+
+### Installing via CocoaPods (Recommended)
+
+1. Make sure you have CocoaPods installed:
+   ```bash
+   brew install cocoapods
+   ```
+
+2. Initialize pods in your project folder:
+   ```bash
+   pod init
+   ```
+
+3. Add the following to your `Podfile`:
+   ```bash
+   source 'https://cdn.cocoapods.org/'
+   source 'https://github.com/Banuba/specs.git'
+   source 'https://github.com/sdk-banuba/banuba-sdk-podspecs.git'
+   
+   banuba_sdk_version = '1.40.0'
+   
+   pod 'BanubaVideoEditorSDK', banuba_sdk_version
+   pod 'BanubaSDKSimple', banuba_sdk_version
+   pod 'BanubaSDK', banuba_sdk_version
+   pod 'BanubaARCloudSDK', banuba_sdk_version      # optional
+   pod 'BanubaAudioBrowserSDK', banuba_sdk_version # optional
+   ```
+
+4. Check your Podfile against the [sample Podfile](https://github.com/Banuba/banuba-sdk-ios-samples/blob/main/Podfile) to ensure it's set up correctly.
+
+5. Install the pods:
+   ```bash
+   pod install --repo-update
+   ```
+
+6. Open your project using the `.xcworkspace` file.
+
+
+### Installing via Swift Package Manager
+
+Follow these steps to install the SDK using Swift Package Manager:
+
+<Steps>
+  <Step title="Open Package Manager">
+    In Xcode, select `File > Add Packages...`
+  </Step>
+  
+  <Step title="Add Mandatory Packages">
+      | Package Name | Purpose |
+      | ------------ | ------- |
+      | [BanubaVideoEditorSDK-iOS](https://github.com/Banuba/BanubaVideoEditorSDK-iOS) | Core video editor functionality |
+      | [BanubaSDKSimple-IOS](https://github.com/Banuba/BanubaSDKSimple-IOS) | Required when not using Face AR |
+  </Step>
+  
+  <Step title="Add Face AR Package (Optional)">
+    - Add the [BanubaSDK-iOS package](https://github.com/Banuba/BanubaSDK-iOS)
+    - Purpose: Provides face AR and masks functionality
+  </Step>
+  
+  <Step title="Add Additional Modules (Optional)">
+    - Audio Browser:
+     - Package: [BanubaAudioBrowserSDK-iOS](https://github.com/Banuba/BanubaAudioBrowserSDK-iOS)
+     - Purpose: Provides audio browsing and selection features
+  </Step>
+</Steps>
+<Note>
+  For each package, make sure to select a compatible version that matches your other SDK components.
+</Note>
+
+
+## Resource Installation
+
+After installing the SDK, you must add these required resources to your project:
+  | Resource | Description | 
+  | -------- | ----------- | 
+  | [**luts**](https://github.com/Banuba/banuba-sdk-ios-samples/tree/main/VEEffectsSDK/luts) | Color effects folder |
+  | [**ColorEffectsPreview**](https://github.com/Banuba/banuba-sdk-ios-samples/tree/main/VEEffectsSDK/ColorEffectsPreview) | Preview images of color effects |
+  | [**Effects Preview**](https://github.com/Banuba/banuba-sdk-ios-samples/tree/main/VEEffectsSDK/Effects%20Preview) | Preview images of visual effects |
+  | [**Localized Strings**](https://github.com/Banuba/banuba-sdk-ios-samples/tree/main/VEEffectsSDK/en.lproj) | Language files for SDK UI |
+
+<Warning>
+  After downloading, make sure to add all resources to your Xcode project and include them in your project's **Build Phases > Copy Bundle Resources** section.
+</Warning>

@@ -17,6 +17,26 @@
             ]
           },
           {
+            "group": "iOS Video Editor SDK",
+            "pages": [
+              "ve-ios/quick_start_guide",
+              "ve-ios/installation",
+              "ve-ios/usage_guide",
+              "ve-ios/advanced_features",
+              "ve-ios/requirements"
+            ]
+          },
+          {
+            "group": "Android Video Editor SDK",
+            "pages": [
+              "ve-android/quick_start_guide",
+              "ve-android/installation",
+              "ve-android/usage_guide",
+              "ve-android/advanced_features",
+              "ve-android/requirements"
+            ]
+          },
+          {
             "group": "Internal SOP",
             "pages": [
               {
