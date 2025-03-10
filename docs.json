@@ -35,55 +35,6 @@
               "ve-android/advanced_features",
               "ve-android/requirements"
             ]
-          },
-          {
-            "group": "Internal SOP",
-            "pages": [
-              {
-                "group": "HR Department",
-                "pages": [
-                  "SOP/HR/Pre-Onboarding_Preparation",
-                  "SOP/HR/Day_1_Onboarding",
-                  "SOP/HR/Onboarding_Training",
-                  "SOP/HR/Onboarding_Follow-Up"
-                ]
-              },
-              {
-                "group": "Sales Department",
-                "pages": [
-                  "SOP/Sales/Contract_Negotiation",
-                  "SOP/Sales/Customer_Prospecting",
-                  "SOP/Sales/Customer_Relationship_Management",
-                  "SOP/Sales/Sales_Demonstration"
-                ]
-              },
-              {
-                "group": "Marketing Department",
-                "pages": [
-                  "SOP/Marketing/Brand_Building_and_Content_Marketing",
-                  "SOP/Marketing/Social_Media_Management",
-                  "SOP/Marketing/Customer_Relationship_Management",
-                  "SOP/Marketing/Data_Analysis_and_Optimization",
-                  "SOP/Marketing/Market_Research_and_Positioning"
-                ]
-              },
-              {
-                "group": "IT Department",
-                "pages": [
-                  "SOP/IT/User_Support_and_Onboarding",
-                  "SOP/IT/Infrastructure_Management",
-                  "SOP/IT/Document_and_Knowledge_Management",
-                  "SOP/IT/IT_Emergency_Response"
-                ]
-              },
-              {
-                "group": "Tech Support Department",
-                "pages": [
-                  "SOP/Tech_Support/Unified_Receipt_and_Handling_Process",
-                  "SOP/Tech_Support/Product_Specific_Technical_Manuals"
-                ]
-              }
-            ]
           }
         ],
     "global": {
